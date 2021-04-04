@@ -1,0 +1,9 @@
+{
+  "name": "@pokernook/multiplayer",
+  "description": "PokerNook multiplayer server",
+  "repository": "github:pokernook/pokernook/multiplayer",
+  "license": "BSD-3-Clause",
+  "engines": {
+    "node": "15.x"
+  }
+}
