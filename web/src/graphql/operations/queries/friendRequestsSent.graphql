@@ -1,0 +1,8 @@
+query friendRequestsSent {
+  me {
+    id
+    friendRequestsSent(where: { status: { equals: PENDING } }) {
+      ...friendRequestFields
+    }
+  }
+}

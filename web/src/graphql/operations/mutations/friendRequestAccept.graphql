@@ -1,0 +1,5 @@
+mutation friendRequestAccept($friendRequestId: String!) {
+  friendRequestAccept(friendRequestId: $friendRequestId) {
+    ...friendRequestFields
+  }
+}

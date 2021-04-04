@@ -4,6 +4,7 @@
   "repository": "github:pokernook/pokernook",
   "license": "BSD-3-Clause",
   "workspaces": [
-    "graphql"
+    "graphql",
+    "web"
   ]
 }

@@ -1,0 +1,12 @@
+fragment friendRequestFields on FriendRequest {
+  id
+  createdAt
+  updatedAt
+  status
+  from {
+    ...userFields
+  }
+  to {
+    ...userFields
+  }
+}

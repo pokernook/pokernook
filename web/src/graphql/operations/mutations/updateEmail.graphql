@@ -1,0 +1,5 @@
+mutation updateEmail($newEmail: EmailAddress!, $password: String!) {
+  userUpdateEmail(newEmail: $newEmail, password: $password) {
+    ...userFields
+  }
+}

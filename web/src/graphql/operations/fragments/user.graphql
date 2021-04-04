@@ -1,0 +1,13 @@
+fragment userFields on User {
+  id
+  createdAt
+  email
+  emailVerified
+  username
+  discriminator
+  status {
+    id
+    emoji
+    message
+  }
+}

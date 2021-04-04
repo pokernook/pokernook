@@ -1,0 +1,12 @@
+mutation statusSet($emoji: EmojiSingular, $message: String) {
+  userStatusSet(emoji: $emoji, message: $message) {
+    createdAt
+    emoji
+    id
+    message
+    updatedAt
+    user {
+      ...userFields
+    }
+  }
+}

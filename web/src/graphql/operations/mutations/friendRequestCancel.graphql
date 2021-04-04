@@ -1,0 +1,5 @@
+mutation friendRequestCancel($friendRequestId: String!) {
+  friendRequestCancel(friendRequestId: $friendRequestId) {
+    ...friendRequestFields
+  }
+}
