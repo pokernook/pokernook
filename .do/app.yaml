@@ -42,7 +42,7 @@ services:
       - key: SECRET
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:hnrVt7/GRMTpLQItfmmnXqrtj6fUokou:vGU9eb9Z2Fn6rfcCEq5ORqey0Ym3gswva9UNWfOPySWTtnswbvWkoHsxcRlce76n]
+        value: EV[1:eiPbITXerGgff5oFcdaIhvMI6WlYkqbi:Yw50HtTXwr0WS3GHlqaZzHQlUGmmIOkryXTGENyDmnl7o+Xk8GW/0H5U3Fa53MeG]
       - key: REDIS_URL
         scope: RUN_AND_BUILD_TIME
         value: ${db-redis-nyc1.REDIS_URL}
