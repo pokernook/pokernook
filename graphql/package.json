@@ -7,9 +7,11 @@
     "node": "15.x"
   },
   "scripts": {
-    "postinstall": "npm run generate:prisma && npm run generate:nexus",
+    "postinstall": "npm run generate",
+    "prebuild": "npm run generate",
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only src/schema",
+    "generate": "npm run generate:prisma && npm run generate:nexus",
     "watch:prisma": "chokidar \"prisma\" --initial --command \"prisma migrate dev && prisma db seed --preview-feature\"",
     "watch:nexus": "ts-node-dev --exit-child --respawn --transpile-only src",
     "watch:typecheck": "tsc --noEmit --watch --preserveWatchOutput",
