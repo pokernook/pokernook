@@ -7,18 +7,17 @@
     "node": "15.x"
   },
   "scripts": {
-    "postinstall": "npm run generate",
-    "prebuild": "npm run generate",
+    "postinstall": "npm run generate:prisma && npm run generate:nexus",
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only src/schema",
-    "generate": "npm run generate:prisma && npm run generate:nexus",
     "watch:prisma": "chokidar \"prisma\" --initial --command \"prisma migrate dev && prisma db seed --preview-feature\"",
     "watch:nexus": "ts-node-dev --exit-child --respawn --transpile-only src",
     "watch:typecheck": "tsc --noEmit --watch --preserveWatchOutput",
     "dev": "dotenv -- concurrently --kill-others npm:watch:*",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ext .js,.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node dist/src"
   },
   "dependencies": {
     "@prisma/client": "2.19.0",

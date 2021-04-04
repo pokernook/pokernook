@@ -28,10 +28,13 @@ services:
     http_port: 8080
     instance_count: 1
     instance_size_slug: basic-xxs
-    build_command: npm run build --workspace=graphql
+    build_command: |-
+      npm run generate:prisma --workspace=graphql
+      npm run generate:nexus --workspace=graphql
+      npm run build --workspace=graphql
     run_command: |-
       npm exec --workspace=graphql -- prisma migrate deploy
-      NODE_ENV=production node graphql/dist/src
+      NODE_ENV=production npm start --workspace=graphql
     envs:
       - key: DATABASE_URL
         scope: RUN_AND_BUILD_TIME
