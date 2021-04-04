@@ -34,7 +34,7 @@ services:
       npm run build --workspace=graphql
     run_command: |-
       npm exec --workspace=graphql -- prisma migrate deploy
-      NODE_ENV=production npm start --workspace=graphql
+      npm start --workspace=graphql
     envs:
       - key: DATABASE_URL
         scope: RUN_AND_BUILD_TIME
