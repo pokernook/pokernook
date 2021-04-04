@@ -1,4 +1,3 @@
-const API_GRAPHQL = process.env.API_GRAPHQL;
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 module.exports = {
@@ -9,6 +8,6 @@ module.exports = {
   rewrites: async () => {
     return IS_PRODUCTION
       ? []
-      : [{ source: "/api/graphql", destination: API_GRAPHQL }];
+      : [{ source: "/api/graphql", destination: "http://localhost:4000" }];
   },
 };
