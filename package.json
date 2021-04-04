@@ -2,5 +2,8 @@
   "name": "pokernook",
   "description": "poker to relax/study to",
   "repository": "github:pokernook/pokernook",
-  "license": "BSD-3-Clause"
+  "license": "BSD-3-Clause",
+  "workspaces": [
+    "graphql"
+  ]
 }
