@@ -1,0 +1,39 @@
+name: Web
+
+on:
+  push:
+    paths:
+      - web/**
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 15.x
+
+      - name: Run ESLint
+        working-directory: web
+        run: |
+          npm install
+          npm run lint
+
+  typecheck:
+    name: Type-Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 15.x
+
+      - name: Run TSC
+        working-directory: web
+        run: |
+          npm install
+          npm run typecheck
