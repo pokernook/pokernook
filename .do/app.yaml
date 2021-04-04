@@ -1,0 +1,59 @@
+name: pokernook
+region: nyc
+
+databases:
+  - cluster_name: db-redis-nyc1
+    engine: REDIS
+    name: db-redis-nyc1
+    production: true
+    version: "6"
+
+  - cluster_name: db-postgresql-nyc1
+    db_name: defaultdb
+    db_user: doadmin
+    engine: PG
+    name: db-postgresql-nyc1
+    production: true
+    version: "12"
+
+services:
+  - name: graphql
+    environment_slug: node-js
+    github:
+      repo: pokernook/pokernook
+      branch: main
+      deploy_on_push: true
+    routes:
+      - path: /api/graphql
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    build_command: npm run build --workspace=graphql
+    run_command: |-
+      npm exec --workspace=graphql -- prisma migrate deploy
+      NODE_ENV=production node graphql/dist/src
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_AND_BUILD_TIME
+        value: ${db-postgresql-nyc1.DATABASE_URL}
+      - key: SECRET
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: EV[1:hnrVt7/GRMTpLQItfmmnXqrtj6fUokou:vGU9eb9Z2Fn6rfcCEq5ORqey0Ym3gswva9UNWfOPySWTtnswbvWkoHsxcRlce76n]
+      - key: REDIS_URL
+        scope: RUN_AND_BUILD_TIME
+        value: ${db-redis-nyc1.REDIS_URL}
+
+  - name: web
+    environment_slug: node-js
+    github:
+      repo: pokernook/pokernook
+      branch: main
+      deploy_on_push: true
+    routes:
+      - path: /
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    build_command: npm run build --workspace=web
+    run_command: npm start --workspace=web
