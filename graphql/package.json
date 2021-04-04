@@ -2,6 +2,7 @@
   "name": "@pokernook/graphql",
   "description": "PokerNook GraphQL API",
   "repository": "github:pokernook/pokernook/graphql",
+  "license": "BSD-3-Clause",
   "engines": {
     "node": "15.x"
   },
