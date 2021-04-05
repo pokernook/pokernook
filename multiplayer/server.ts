@@ -5,11 +5,7 @@ const DATABASE_URL = process.env.DATABASE_URL || "";
 const PORT = parseInt(process.env.PORT || "8000", 10);
 
 const server = Server({
-  db: new PostgresStore(DATABASE_URL, {
-    ssl: true,
-    native: true,
-    dialect: "postgres",
-  }),
+  db: new PostgresStore(DATABASE_URL, { ssl: true }),
   games: [],
 });
 
