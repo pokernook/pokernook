@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ext .js,.ts",
     "build": "tsc",
-    "start": "NODE_ENV=production node dist/src"
+    "start": "node dist/src"
   },
   "dependencies": {
     "@prisma/client": "2.19.0",

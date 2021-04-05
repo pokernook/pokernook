@@ -39,6 +39,9 @@ services:
       - key: DATABASE_URL
         scope: RUN_AND_BUILD_TIME
         value: ${db-postgresql-nyc1.DATABASE_URL}
+      - key: NODE_ENV
+        scope: RUN_TIME
+        value: production
       - key: SECRET
         scope: RUN_AND_BUILD_TIME
         type: SECRET
@@ -46,6 +49,24 @@ services:
       - key: REDIS_URL
         scope: RUN_AND_BUILD_TIME
         value: ${db-redis-nyc1.REDIS_URL}
+
+  - name: multiplayer
+    environment_slug: node-js
+    github:
+      repo: pokernook/pokernook
+      branch: main
+      deploy_on_push: true
+    routes:
+      - path: /api/multiplayer
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    build_command: npm run build --workspace=multiplayer
+    run_command: npm start --workspace=multiplayer
+    envs:
+      - key: NODE_ENV
+        scope: RUN_TIME
+        value: production
 
   - name: web
     environment_slug: node-js
