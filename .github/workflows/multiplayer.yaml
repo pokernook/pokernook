@@ -1,0 +1,39 @@
+name: Multiplayer
+
+on:
+  push:
+    paths:
+      - multiplayer/**
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 15.x
+
+      - name: Run ESLint
+        working-directory: multiplayer
+        run: |
+          npm install
+          npm run lint
+
+  typecheck:
+    name: Type-Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 15.x
+
+      - name: Run TSC
+        working-directory: multiplayer
+        run: |
+          npm install
+          npm run typecheck
