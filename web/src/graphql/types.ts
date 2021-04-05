@@ -317,6 +317,23 @@ export type FriendRequestSendMutation = (
   )> }
 );
 
+export type FriendshipDeleteMutationVariables = Exact<{
+  friendshipId: Scalars['String'];
+}>;
+
+
+export type FriendshipDeleteMutation = (
+  { __typename?: 'Mutation' }
+  & { friendshipDelete?: Maybe<(
+    { __typename?: 'Friendship' }
+    & Pick<Friendship, 'id'>
+    & { users: Array<(
+      { __typename?: 'User' }
+      & UserFieldsFragment
+    )> }
+  )> }
+);
+
 export type LogInMutationVariables = Exact<{
   email: Scalars['EmailAddress'];
   password: Scalars['String'];
@@ -576,6 +593,20 @@ export const FriendRequestSendDocument = gql`
 
 export function useFriendRequestSendMutation() {
   return Urql.useMutation<FriendRequestSendMutation, FriendRequestSendMutationVariables>(FriendRequestSendDocument);
+};
+export const FriendshipDeleteDocument = gql`
+    mutation friendshipDelete($friendshipId: String!) {
+  friendshipDelete(friendshipId: $friendshipId) {
+    id
+    users {
+      ...userFields
+    }
+  }
+}
+    ${UserFieldsFragmentDoc}`;
+
+export function useFriendshipDeleteMutation() {
+  return Urql.useMutation<FriendshipDeleteMutation, FriendshipDeleteMutationVariables>(FriendshipDeleteDocument);
 };
 export const LogInDocument = gql`
     mutation logIn($email: EmailAddress!, $password: String!) {

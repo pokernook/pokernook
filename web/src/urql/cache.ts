@@ -113,7 +113,22 @@ export const updates: Partial<UpdatesConfig> = {
           return data;
         }
       );
-      cache.invalidate("Query", "friendships");
+    },
+
+    friendshipDelete: (result, _args, cache) => {
+      cache.updateQuery(
+        { query: graphql.FriendshipsDocument },
+        (data: graphql.FriendshipsQuery | null) => {
+          const castResult = result as graphql.FriendshipDeleteMutation;
+          if (data?.me) {
+            const removedIndex = data.me.friendships.findIndex(
+              (f) => f.id === castResult.friendshipDelete?.id
+            );
+            data.me.friendships.splice(removedIndex, 1);
+          }
+          return data;
+        }
+      );
     },
   },
 };

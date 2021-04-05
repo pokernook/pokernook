@@ -1,7 +1,18 @@
-import { Box, Flex, HStack, Icon, IconButton, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  HStack,
+  Icon,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+} from "@chakra-ui/react";
 import { formatDistanceToNow } from "date-fns";
 import { FC, ReactNode } from "react";
-import { FiCheck, FiMoreVertical, FiX } from "react-icons/fi";
+import { FiCheck, FiMoreVertical, FiTrash2, FiX } from "react-icons/fi";
 
 import { FriendRequestFieldsFragment, UserFieldsFragment } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
@@ -20,9 +31,10 @@ const FriendCard: FC<FriendCard> = ({ children }: FriendCard) => (
 
 type FriendProps = {
   friend: UserFieldsFragment;
+  onRemove: () => void;
 };
 
-export const Friend: FC<FriendProps> = ({ friend }: FriendProps) => (
+export const Friend: FC<FriendProps> = ({ friend, onRemove }: FriendProps) => (
   <FriendCard>
     <Avatar src={useAvatarSrc(friend)} boxSize={14} mr={2} />
     <Box>
@@ -41,10 +53,22 @@ export const Friend: FC<FriendProps> = ({ friend }: FriendProps) => (
     </Box>
 
     <Flex justifyContent="flex-end" flex={1}>
-      <IconButton
-        aria-label="More options"
-        icon={<Icon as={FiMoreVertical} />}
-      />
+      <Menu>
+        <MenuButton
+          aria-label="More options"
+          as={IconButton}
+          icon={<Icon as={FiMoreVertical} />}
+        />
+        <MenuList>
+          <MenuItem
+            onClick={onRemove}
+            icon={<Icon as={FiTrash2} />}
+            color="red"
+          >
+            Remove friend
+          </MenuItem>
+        </MenuList>
+      </Menu>
     </Flex>
   </FriendCard>
 );
