@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn server",
     "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .js,.ts",
     "build": "tsc",
     "start": "NODE_ENV=production node dist/server"
   },
