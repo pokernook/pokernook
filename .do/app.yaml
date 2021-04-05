@@ -64,6 +64,9 @@ services:
     build_command: npm run build --workspace=multiplayer
     run_command: npm start --workspace=multiplayer
     envs:
+      - key: DATABASE_URL
+        scope: RUN_AND_BUILD_TIME
+        value: ${db-postgresql-nyc1.DATABASE_URL}
       - key: NODE_ENV
         scope: RUN_TIME
         value: production
