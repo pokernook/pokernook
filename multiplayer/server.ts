@@ -6,4 +6,7 @@ const server = Server({
   games: [],
 });
 
-server.run(PORT, () => console.info(`Multiplayer server on ${PORT}`));
+server
+  .run(PORT)
+  .then(() => console.info(`Multiplayer server on ${PORT}`))
+  .catch((e) => console.error(e));
