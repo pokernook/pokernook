@@ -10,7 +10,10 @@ module.exports = {
       ? []
       : [
           { source: "/api/graphql", destination: "http://localhost:4000" },
-          { source: "/api/multiplayer", destination: "http://localhost:8000" },
+          {
+            source: "/api/multiplayer/:path*",
+            destination: "http://localhost:8000/:path*",
+          },
         ];
   },
 };
