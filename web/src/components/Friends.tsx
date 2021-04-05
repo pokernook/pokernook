@@ -31,9 +31,10 @@ const FriendCard: FC<FriendCard> = ({ children }: FriendCard) => (
 
 type FriendProps = {
   friend: UserFieldsFragment;
+  onRemove: () => void;
 };
 
-export const Friend: FC<FriendProps> = ({ friend }: FriendProps) => (
+export const Friend: FC<FriendProps> = ({ friend, onRemove }: FriendProps) => (
   <FriendCard>
     <Avatar src={useAvatarSrc(friend)} boxSize={14} mr={2} />
     <Box>
@@ -60,7 +61,11 @@ export const Friend: FC<FriendProps> = ({ friend }: FriendProps) => (
           />
         </MenuButton>
         <MenuList>
-          <MenuItem icon={<Icon as={FiTrash2} />} color="red">
+          <MenuItem
+            onClick={onRemove}
+            icon={<Icon as={FiTrash2} />}
+            color="red"
+          >
             Remove friend
           </MenuItem>
         </MenuList>
