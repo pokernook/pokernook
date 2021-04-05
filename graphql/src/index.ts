@@ -58,6 +58,6 @@ const build = async () => {
 
 build()
   .then((app) =>
-    app.listen(PORT, "::", (_e, address) => console.info(`🚀 ${address}`))
+    app.listen(PORT, "::", () => console.info(`GraphQL server on ${PORT}`))
   )
   .catch((e) => console.error(e));
