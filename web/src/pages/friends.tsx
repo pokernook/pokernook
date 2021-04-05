@@ -31,6 +31,7 @@ import {
   useFriendRequestSendMutation,
   useFriendRequestsReceivedQuery,
   useFriendRequestsSentQuery,
+  useFriendshipDeleteMutation,
   useFriendshipsQuery,
 } from "../graphql";
 import { parseUserTag } from "../utils/parse-user-tag";
@@ -68,6 +69,7 @@ const Friends: FC = () => (
 
 const AllFriends = () => {
   const [friendshipsQuery] = useFriendshipsQuery();
+  const [, friendshipDelete] = useFriendshipDeleteMutation();
 
   const { data } = friendshipsQuery;
 
@@ -77,7 +79,13 @@ const AllFriends = () => {
         friendship.users.map(
           (friend) =>
             data.me?.id !== friend.id && (
-              <Friend key={friend.id} friend={friend} />
+              <Friend
+                key={friend.id}
+                friend={friend}
+                onRemove={() =>
+                  friendshipDelete({ friendshipId: friendship.id })
+                }
+              />
             )
         )
       )}
