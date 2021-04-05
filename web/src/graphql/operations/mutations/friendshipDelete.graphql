@@ -1,0 +1,8 @@
+mutation friendshipDelete($friendshipId: String!) {
+  friendshipDelete(friendshipId: $friendshipId) {
+    id
+    users {
+      ...userFields
+    }
+  }
+}
