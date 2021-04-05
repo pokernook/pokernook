@@ -7,13 +7,15 @@ import {
   NextScript,
 } from "next/document";
 
+import { theme } from "../theme";
+
 class Document extends NextDocument {
   render(): JSX.Element {
     return (
       <Html>
         <Head />
         <body>
-          <ColorModeScript />
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
           <NextScript />
         </body>

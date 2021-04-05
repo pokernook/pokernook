@@ -6,7 +6,7 @@ import { styles } from "./styles";
 const overrides: ThemeOverride = {
   styles,
   config: {
-    initialColorMode: "light",
+    initialColorMode: "dark",
   },
   components: {
     Link,
