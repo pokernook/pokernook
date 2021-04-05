@@ -5,5 +5,14 @@
   "license": "BSD-3-Clause",
   "engines": {
     "node": "15.x"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "boardgame.io": "^0.43.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.3"
   }
 }
