@@ -54,12 +54,11 @@ export const Friend: FC<FriendProps> = ({ friend, onRemove }: FriendProps) => (
 
     <Flex justifyContent="flex-end" flex={1}>
       <Menu>
-        <MenuButton>
-          <IconButton
-            aria-label="More options"
-            icon={<Icon as={FiMoreVertical} />}
-          />
-        </MenuButton>
+        <MenuButton
+          aria-label="More options"
+          as={IconButton}
+          icon={<Icon as={FiMoreVertical} />}
+        />
         <MenuList>
           <MenuItem
             onClick={onRemove}
