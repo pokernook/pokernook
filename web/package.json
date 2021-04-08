@@ -22,7 +22,7 @@
     "@emotion/styled": "^11.1.5",
     "@urql/devtools": "^2.0.3",
     "@urql/exchange-graphcache": "^4.0.0",
-    "boardgame.io": "^0.43.3",
+    "boardgame.io": "^0.44.0",
     "date-fns": "^2.19.0",
     "emoji-mart": "^3.0.1",
     "framer-motion": "^4.1.3",
