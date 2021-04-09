@@ -43,7 +43,7 @@ const build = async () => {
   });
   await app.register(mercurius, {
     context: buildContext,
-    graphiql: IS_PRODUCTION ? false : "playground",
+    graphiql: "playground",
     jit: 1,
     path: "/",
     schema,
