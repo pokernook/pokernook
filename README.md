@@ -26,6 +26,8 @@ Then run
 
 ```bash
 npm install # From the root directory
+
+docker compose up --detach # Start required services
 ```
 
 ## Contributing
