@@ -1,7 +1,6 @@
 import {
   Button,
   Icon,
-  Input,
   Menu,
   MenuButton,
   MenuDivider,
@@ -12,7 +11,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { FC } from "react";
-import { FiSettings } from "react-icons/fi";
+import { FiEdit2, FiSettings } from "react-icons/fi";
 
 import { useLogOutMutation, useStatusClearMutation } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
@@ -70,17 +69,15 @@ export const UserNavMenu: FC = () => {
           </MenuItem>
 
           <MenuItem onClick={onStatusOpen}>
-            <Input
-              variant="filled"
-              isTruncated
-              isReadOnly
-              _hover={{ cursor: "pointer" }}
-              defaultValue={
-                user?.status
-                  ? `${user.status.emoji || ""} ${user.status.message || ""}`
-                  : "Update status"
-              }
-            />
+            {user?.status ? (
+              <Button isTruncated isFullWidth justifyContent="left">
+                {user.status.emoji} {user.status.message}
+              </Button>
+            ) : (
+              <Button leftIcon={<Icon as={FiEdit2} />} isFullWidth>
+                Update your status
+              </Button>
+            )}
           </MenuItem>
 
           {user?.status && (
