@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Heading,
   Input,
@@ -18,7 +19,11 @@ import { Card } from "../components/Card";
 import { SignUpMutationVariables, useSignUpMutation } from "../graphql";
 
 const SignUp: FC = () => {
-  const { register, handleSubmit } = useForm<SignUpMutationVariables>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpMutationVariables>();
   const [signUpResult, signUp] = useSignUpMutation();
   const toast = useToast();
 
@@ -37,26 +42,54 @@ const SignUp: FC = () => {
 
       <Card minW={340} textAlign="center">
         <Box as="form" onSubmit={onSubmit}>
-          <FormControl mb={2}>
+          <FormControl mb={2} isInvalid={!!errors.username}>
             <FormLabel>Username</FormLabel>
             <Input
               type="text"
               spellCheck={false}
-              {...register("username", { required: true })}
+              {...register("username", {
+                required: true,
+                minLength: {
+                  message: "Username must be at least 3 characters",
+                  value: 3,
+                },
+                maxLength: {
+                  message: "Username must be at most 20 characters",
+                  value: 20,
+                },
+              })}
             />
+            <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
           </FormControl>
 
-          <FormControl mb={2}>
+          <FormControl mb={2} isInvalid={!!errors.email}>
             <FormLabel>Email</FormLabel>
-            <Input type="email" {...register("email", { required: true })} />
+            <Input
+              type="email"
+              {...register("email", {
+                required: true,
+                pattern: {
+                  message: "Email format is invalid",
+                  value: /\S+@\S+\.\S+/,
+                },
+              })}
+            />
+            <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
           </FormControl>
 
-          <FormControl mb={3}>
+          <FormControl mb={3} isInvalid={!!errors.password}>
             <FormLabel>Password</FormLabel>
             <Input
               type="password"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: true,
+                minLength: {
+                  message: "Password must be at least 8 characters",
+                  value: 8,
+                },
+              })}
             />
+            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
 
           <Button
