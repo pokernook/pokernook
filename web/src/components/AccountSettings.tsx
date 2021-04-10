@@ -12,12 +12,14 @@ import {
   Divider,
   Fade,
   FormControl,
+  FormErrorMessage,
   FormHelperText,
   FormLabel,
   Heading,
   Input,
   Link,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { FC, useRef } from "react";
 import { useForm } from "react-hook-form";
@@ -46,20 +48,21 @@ const UpdateEmail = () => {
   const {
     handleSubmit,
     register,
-    formState,
+    formState: { errors, isDirty },
     reset,
   } = useForm<MutationUserUpdateEmailArgs>({
     defaultValues: { newEmail: user?.email },
   });
   const [, updateEmail] = useUpdateEmailMutation();
-
-  const { isDirty } = formState;
+  const toast = useToast();
 
   const onSubmit = handleSubmit(async (data) => {
     const result = await updateEmail(data);
-    if (!result.error) {
-      reset({ newEmail: result.data?.userUpdateEmail?.email });
+    if (result.error) {
+      return toast({ status: "error", title: result.error.message });
     }
+    reset({ newEmail: result.data?.userUpdateEmail?.email });
+    toast({ status: "success", title: "Email updated" });
   });
 
   return (
@@ -68,9 +71,18 @@ const UpdateEmail = () => {
         Email
       </Heading>
 
-      <FormControl mb={2}>
+      <FormControl mb={2} isInvalid={!!errors.newEmail}>
         <FormLabel>Email address</FormLabel>
-        <Input type="email" {...register("newEmail", { required: true })} />
+        <Input
+          type="email"
+          {...register("newEmail", {
+            required: true,
+            pattern: {
+              message: "Email format is invalid",
+              value: /\S+@\S+\.\S+/,
+            },
+          })}
+        />
         <FormHelperText>
           {!user?.emailVerified && (
             <>
@@ -79,10 +91,11 @@ const UpdateEmail = () => {
             </>
           )}
         </FormHelperText>
+        <FormErrorMessage>{errors.newEmail?.message}</FormErrorMessage>
       </FormControl>
 
       <Fade in={isDirty} unmountOnExit>
-        <FormControl mb={3}>
+        <FormControl mb={3} isInvalid={!!errors.password}>
           <FormLabel>Password</FormLabel>
           <Input
             type="password"
@@ -101,14 +114,18 @@ const UpdatePassword = () => {
     register,
     handleSubmit,
     reset,
+    formState: { errors },
   } = useForm<MutationUserUpdatePasswordArgs>();
   const [, updatePassword] = useUpdatePasswordMutation();
+  const toast = useToast();
 
   const onSubmit = handleSubmit(async (data) => {
     const result = await updatePassword(data);
-    if (!result.error) {
-      reset();
+    if (result.error) {
+      return toast({ status: "error", title: result.error.message });
     }
+    reset();
+    toast({ status: "success", title: "Password updated" });
   });
 
   return (
@@ -117,7 +134,7 @@ const UpdatePassword = () => {
         Update password
       </Heading>
 
-      <FormControl mb={2}>
+      <FormControl mb={2} isInvalid={!!errors.currentPassword}>
         <FormLabel>Current password</FormLabel>
         <Input
           type="password"
@@ -125,12 +142,19 @@ const UpdatePassword = () => {
         />
       </FormControl>
 
-      <FormControl mb={3}>
+      <FormControl mb={3} isInvalid={!!errors.newPassword}>
         <FormLabel>New password</FormLabel>
         <Input
           type="password"
-          {...register("newPassword", { required: true })}
+          {...register("newPassword", {
+            required: true,
+            minLength: {
+              message: "Password must be at least 8 characters",
+              value: 8,
+            },
+          })}
         />
+        <FormErrorMessage>{errors.newPassword?.message}</FormErrorMessage>
       </FormControl>
 
       <Button type="submit">Update password</Button>
