@@ -24,9 +24,7 @@ const REDIS_URL = process.env.REDIS_URL || "";
 const build = async () => {
   const app = Fastify();
 
-  await app.register(helmet, {
-    contentSecurityPolicy: IS_PRODUCTION ? undefined : false,
-  });
+  await app.register(helmet, { contentSecurityPolicy: false });
   await app.register(cookie);
   await app.register(redis, { url: REDIS_URL });
   await app.register(session, {
