@@ -3,6 +3,7 @@ import {
   Button,
   ButtonGroup,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Grid,
   Icon,
@@ -45,7 +46,11 @@ export const ProfileModal: FC<Props> = ({ onClose, ...props }: Props) => {
     onOpen: onCropperOpen,
     onClose: onCropperClose,
   } = useDisclosure();
-  const { register, handleSubmit } = useForm<FormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
     defaultValues: { username: user?.username },
   });
 
@@ -78,9 +83,24 @@ export const ProfileModal: FC<Props> = ({ onClose, ...props }: Props) => {
           <ModalBody as="form" id="profile-form" onSubmit={handleProfileUpdate}>
             <Grid gap={3} templateColumns={[2, "2fr 1fr"]}>
               <Box>
-                <FormControl>
+                <FormControl isInvalid={!!errors.username}>
                   <FormLabel>Username</FormLabel>
-                  <Input spellCheck={false} {...register("username")} />
+                  <Input
+                    spellCheck={false}
+                    {...register("username", {
+                      minLength: {
+                        message: "Username must be at least 3 characters",
+                        value: 3,
+                      },
+                      maxLength: {
+                        message: "Username must be at most 20 characters",
+                        value: 20,
+                      },
+                    })}
+                  />
+                  <FormErrorMessage>
+                    {errors.username?.message}
+                  </FormErrorMessage>
                 </FormControl>
               </Box>
 
