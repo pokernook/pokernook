@@ -12,3 +12,6 @@ generates:
       - typescript
       - typescript-operations
       - typescript-urql
+config:
+  scalars:
+    EmailAddress: string
