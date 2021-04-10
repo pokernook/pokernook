@@ -100,8 +100,8 @@ const AddFriend = () => {
     register,
     reset,
     handleSubmit,
-    formState: { errors },
-  } = useForm<{ tag: string }>();
+    formState: { dirtyFields, errors },
+  } = useForm<{ tag: string }>({ defaultValues: { tag: "" } });
   const [, sendFriendRequest] = useFriendRequestSendMutation();
   const toast = useToast();
 
@@ -116,7 +116,7 @@ const AddFriend = () => {
 
   return (
     <Box as="form" onSubmit={onSubmit}>
-      <FormControl isInvalid={!!errors.tag}>
+      <FormControl isInvalid={dirtyFields.tag && !!errors.tag}>
         <FormLabel>Add a friend with their PokerNook Tag</FormLabel>
         <HStack>
           <Input
