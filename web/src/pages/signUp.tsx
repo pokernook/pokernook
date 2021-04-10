@@ -7,6 +7,7 @@ import {
   Input,
   Link as ChakraLink,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { FC } from "react";
@@ -19,8 +20,14 @@ import { SignUpMutationVariables, useSignUpMutation } from "../graphql";
 const SignUp: FC = () => {
   const { register, handleSubmit } = useForm<SignUpMutationVariables>();
   const [signUpResult, signUp] = useSignUpMutation();
+  const toast = useToast();
 
-  const onSubmit = handleSubmit((data) => signUp(data));
+  const onSubmit = handleSubmit(async (data) => {
+    const result = await signUp(data);
+    if (result.error) {
+      toast({ status: "error", title: result.error.message });
+    }
+  });
 
   return (
     <AuthLayout>
