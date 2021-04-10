@@ -4,6 +4,7 @@ import {
   Button,
   ButtonGroup,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   InputGroup,
@@ -18,6 +19,7 @@ import {
   ModalProps,
   useColorMode,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { BaseEmoji, Picker } from "emoji-mart";
 import { FC } from "react";
@@ -45,12 +47,19 @@ export const StatusModal: FC<Props> = ({ onClose, ...props }: Props) => {
     onOpen: onPickerOpen,
     onClose: onPickerClose,
   } = useDisclosure();
-  const { control, handleSubmit, register, getValues } = useForm<FormData>({
+  const {
+    control,
+    handleSubmit,
+    register,
+    getValues,
+    formState: { errors },
+  } = useForm<FormData>({
     defaultValues: {
       emoji: defaultEmoji,
       message: user?.status?.message,
     },
   });
+  const toast = useToast();
 
   const handleClearStatus = async () => {
     onClose();
@@ -59,9 +68,10 @@ export const StatusModal: FC<Props> = ({ onClose, ...props }: Props) => {
 
   const handleSaveStatus = handleSubmit(async (data) => {
     const result = await setStatus(data);
-    if (!result.error) {
-      onClose();
+    if (result.error) {
+      return toast({ status: "error", title: result.error.message });
     }
+    onClose();
   });
 
   return (
@@ -73,7 +83,7 @@ export const StatusModal: FC<Props> = ({ onClose, ...props }: Props) => {
           <ModalCloseButton />
 
           <ModalBody as="form" id="status-form" onSubmit={handleSaveStatus}>
-            <FormControl mb={3}>
+            <FormControl mb={3} isInvalid={!!errors.message}>
               <FormLabel>What&apos;s happening {user?.username}?</FormLabel>
               <InputGroup>
                 <InputLeftElement
@@ -85,10 +95,17 @@ export const StatusModal: FC<Props> = ({ onClose, ...props }: Props) => {
                 </InputLeftElement>
                 <Input
                   spellCheck
-                  {...register("message", { required: true })}
+                  {...register("message", {
+                    required: true,
+                    maxLength: {
+                      message: "Status must be at most 80 characters",
+                      value: 80,
+                    },
+                  })}
                   pl="3rem"
                 />
               </InputGroup>
+              <FormErrorMessage>{errors.message?.message}</FormErrorMessage>
             </FormControl>
           </ModalBody>
 
