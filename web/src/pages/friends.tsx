@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Heading,
   HStack,
@@ -13,6 +14,7 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
+  useToast,
 } from "@chakra-ui/react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -94,24 +96,37 @@ const AllFriends = () => {
 };
 
 const AddFriend = () => {
-  const { register, reset, handleSubmit } = useForm<{ tag: string }>();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<{ tag: string }>();
   const [, sendFriendRequest] = useFriendRequestSendMutation();
+  const toast = useToast();
 
   const onSubmit = handleSubmit(async ({ tag }) => {
     const userTag = parseUserTag(tag);
     const result = await sendFriendRequest(userTag);
-    if (!result.error) {
-      reset();
+    if (result.error) {
+      return toast({ status: "error", title: result.error.message });
     }
+    reset();
   });
 
   return (
     <Box as="form" onSubmit={onSubmit}>
-      <FormControl>
+      <FormControl isInvalid={!!errors.tag}>
         <FormLabel>Add a friend with their PokerNook Tag</FormLabel>
         <HStack>
           <Input
-            {...register("tag", { required: true, pattern: /^.+#\d{1,4}$/ })}
+            {...register("tag", {
+              required: true,
+              pattern: {
+                message: "Tag is invalid; try Username#0000",
+                value: /^.+#\d{1,4}$/,
+              },
+            })}
             spellCheck={false}
             placeholder="Enter a Username#0000"
           />
@@ -125,6 +140,7 @@ const AddFriend = () => {
             Send request
           </Button>
         </HStack>
+        <FormErrorMessage>{errors.tag?.message}</FormErrorMessage>
       </FormControl>
     </Box>
   );
