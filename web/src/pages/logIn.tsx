@@ -18,7 +18,11 @@ import { Card } from "../components/Card";
 import { LogInMutationVariables, useLogInMutation } from "../graphql";
 
 const LogIn: FC = () => {
-  const { register, handleSubmit } = useForm<LogInMutationVariables>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LogInMutationVariables>();
   const [logInResult, logIn] = useLogInMutation();
   const toast = useToast();
 
@@ -37,12 +41,12 @@ const LogIn: FC = () => {
 
       <Card minW={340} textAlign="center">
         <Box as="form" onSubmit={onSubmit}>
-          <FormControl mb={2}>
+          <FormControl mb={2} isInvalid={!!errors.email}>
             <FormLabel>Email</FormLabel>
             <Input type="email" {...register("email", { required: true })} />
           </FormControl>
 
-          <FormControl mb={3}>
+          <FormControl mb={3} isInvalid={!!errors.password}>
             <FormLabel>Password</FormLabel>
             <Input
               type="password"
