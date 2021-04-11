@@ -1,6 +1,8 @@
+const withTM = require("next-transpile-modules")(["@pokernook/multiplayer"]);
+
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
-module.exports = {
+module.exports = withTM({
   reactStrictMode: true,
   rewrites: async () => {
     return IS_PRODUCTION
@@ -13,4 +15,4 @@ module.exports = {
           },
         ];
   },
-};
+});
