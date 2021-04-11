@@ -23,7 +23,7 @@ export const SideNav: FC = () => {
       <Divider my={3} />
 
       <Stack as="nav" mx={3}>
-        <NavLink href="/">Play</NavLink>
+        <NavLink href="/play">Play</NavLink>
         <NavLink href="/friends">Friends</NavLink>
       </Stack>
     </>

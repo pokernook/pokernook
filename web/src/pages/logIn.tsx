@@ -68,7 +68,7 @@ const LogIn: FC = () => {
       <Card mt={3} minW={340} textAlign="center">
         <Text>
           New &apos;round these parts?{" "}
-          <Link href="/signUp" passHref>
+          <Link href="/" passHref>
             <ChakraLink>Sign up</ChakraLink>
           </Link>
           .
