@@ -11,3 +11,19 @@ services:
     image: redis:6-alpine
     ports:
       - 6379:6379
+
+  multiplayer:
+    build:
+      context: ./multiplayer
+      dockerfile: Dockerfile
+    command: npm run dev
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://postgres:password@postgres:5432
+      PORT: "8000"
+    ports:
+      - 8000:8000
+    volumes:
+      - ./multiplayer:/app
+      - /app/node_modules
