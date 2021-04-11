@@ -3,6 +3,7 @@
   "description": "PokerNook multiplayer server",
   "repository": "github:pokernook/pokernook/multiplayer",
   "license": "BSD-3-Clause",
+  "main": "server",
   "engines": {
     "node": "15.x"
   },
