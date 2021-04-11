@@ -25,9 +25,9 @@ Install
 Then run
 
 ```bash
-npm install # From the root directory
+npm install
 
-docker compose up --detach # Start required services
+docker compose up
 ```
 
 ## Contributing
