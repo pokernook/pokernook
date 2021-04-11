@@ -1,7 +1,7 @@
 import { PostgresStore } from "bgio-postgres";
 import { Server } from "boardgame.io/server";
 
-import { TicTacToe } from "./games";
+import { DemoNumbers } from "./games";
 
 const DATABASE_URL = process.env.DATABASE_URL || "";
 const PORT = parseInt(process.env.PORT || "8000", 10);
@@ -13,7 +13,7 @@ const server = Server({
       ssl: IS_PRODUCTION ? { rejectUnauthorized: false } : undefined,
     },
   }),
-  games: [TicTacToe],
+  games: [DemoNumbers],
 });
 
 server
