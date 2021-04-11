@@ -8,11 +8,13 @@ const PORT = parseInt(process.env.PORT || "8000", 10);
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 const server = Server({
-  db: new PostgresStore(DATABASE_URL, {
-    dialectOptions: {
-      ssl: IS_PRODUCTION ? { rejectUnauthorized: false } : undefined,
-    },
-  }),
+  db: IS_PRODUCTION
+    ? new PostgresStore(DATABASE_URL, {
+        dialectOptions: {
+          ssl: { rejectUnauthorized: false },
+        },
+      })
+    : undefined,
   games: [DemoNumbers],
 });
 
