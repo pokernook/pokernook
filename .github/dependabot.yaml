@@ -12,3 +12,13 @@ updates:
     open-pull-requests-limit: 10
     schedule:
       interval: daily
+
+  - package-ecosystem: docker
+    directory: /graphql
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /multiplayer
+    schedule:
+      interval: daily
