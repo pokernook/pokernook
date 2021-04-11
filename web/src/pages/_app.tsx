@@ -3,13 +3,16 @@ import { AppProps } from "next/app";
 import { withUrqlClient, WithUrqlProps } from "next-urql";
 import { FC } from "react";
 
+import { LobbyProvider } from "../context";
 import { theme } from "../theme";
 import { getClientConfig } from "../urql";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <LobbyProvider server="/api/multiplayer">
+        <Component {...pageProps} />
+      </LobbyProvider>
     </ChakraProvider>
   );
 };
