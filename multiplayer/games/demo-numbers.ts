@@ -1,11 +1,11 @@
 import { Game } from "boardgame.io";
 
-type GameState = {
+export type DemoNumbersState = {
   numbers: [number, number];
   string?: string;
 };
 
-export const DemoNumbers: Game<GameState> = {
+export const DemoNumbers: Game<DemoNumbersState> = {
   name: "demo-numbers",
 
   setup: (ctx) => ({
