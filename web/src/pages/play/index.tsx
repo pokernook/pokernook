@@ -1,9 +1,10 @@
 import { Box, Divider, Heading, Tag, Wrap, WrapItem } from "@chakra-ui/react";
 import { LobbyAPI } from "boardgame.io";
+import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 
-import { DashboardLayout } from "../components/DashboardLayout";
-import { useLobby } from "../context";
+import { DashboardLayout } from "../../components/DashboardLayout";
+import { useLobby } from "../../context";
 
 const Play: FC = () => {
   const lobby = useLobby();
@@ -54,24 +55,26 @@ const GameCard: FC<GameCardProps> = ({ game }: GameCardProps) => {
   }, [game, lobby]);
 
   return (
-    <Box
-      w="xs"
-      h="24"
-      borderWidth={2}
-      borderRadius="md"
-      p={4}
-      _hover={{ cursor: "pointer" }}
-    >
-      <Heading as="h2" size="md" textTransform="capitalize" mb={3}>
-        {game.replaceAll("-", " ")}
-      </Heading>
+    <Link href={`/play/${game}`}>
+      <Box
+        w="xs"
+        h="24"
+        borderWidth={2}
+        borderRadius="md"
+        p={4}
+        _hover={{ cursor: "pointer" }}
+      >
+        <Heading as="h2" size="md" textTransform="capitalize" mb={3}>
+          {game.replaceAll("-", " ")}
+        </Heading>
 
-      <Tag variant="subtle" colorScheme="blue">
-        {activeMatches?.length === 1
-          ? "1 match"
-          : `${activeMatches?.length || "0"} matches`}
-      </Tag>
-    </Box>
+        <Tag variant="subtle" colorScheme="blue">
+          {activeMatches?.length === 1
+            ? "1 match"
+            : `${activeMatches?.length || "0"} matches`}
+        </Tag>
+      </Box>
+    </Link>
   );
 };
 
