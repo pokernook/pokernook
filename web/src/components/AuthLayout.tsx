@@ -12,7 +12,7 @@ type AuthLayoutProps = {
 export const AuthLayout: FC<AuthLayoutProps> = ({
   children,
 }: AuthLayoutProps) => {
-  const { fetching } = useUser({ hrefIfFound: "/" });
+  const { fetching } = useUser({ hrefIfFound: "/play" });
 
   if (fetching) {
     return <Loading />;
