@@ -20,7 +20,7 @@
     "start": "node dist/src"
   },
   "dependencies": {
-    "@prisma/client": "2.19.0",
+    "@prisma/client": "^2.21.1",
     "argon2": "^0.27.0",
     "emoji-regex": "^9.2.2",
     "fastify": "^3.14.2",
@@ -33,7 +33,7 @@
     "mercurius": "^7.4.0",
     "mqemitter-redis": "^4.1.0",
     "nexus": "^1.0.0",
-    "nexus-plugin-prisma": "^0.33.0",
+    "nexus-plugin-prisma": "^0.34.1",
     "nexus-shield": "^2.0.0",
     "nexus-validate": "^1.0.0",
     "yup": "^0.32.8"
@@ -51,7 +51,7 @@
     "eslint-plugin-prettier": "^3.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "^2.1.2",
-    "prisma": "2.19.0",
+    "prisma": "^2.21.1",
     "ts-node": "^9.0.0",
     "ts-node-dev": "^1.1.0",
     "typescript": "^4.2.4"
