@@ -16,8 +16,8 @@
     "dev": "dotenv -- concurrently --kill-others npm:watch:*",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ext .js,.ts",
+    "prebuild": "npm run generate",
     "build": "tsc",
-    "prestart": "npm run generate",
     "start": "node dist/src"
   },
   "dependencies": {
