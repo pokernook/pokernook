@@ -12,27 +12,6 @@ services:
     image: redis:6-alpine
     ports:
       - 6379:6379
-  
-  graphql:
-    build:
-      context: ./graphql
-      dockerfile: Dockerfile
-    command: npm run dev
-    depends_on:
-      - postgres
-      - redis
-    environment:
-      SECRET: oo6iP6dQRC/qm2WlUn3Tej+LocObV801
-      DATABASE_URL: postgresql://postgres:password@postgres:5432
-      REDIS_URL: redis://:@redis:6379
-      PORT: "4000"
-      SHELL: /bin/ash
-      NODE_ENV: development
-    ports:
-      - 4000:4000
-    volumes:
-      - ./graphql:/app
-      - /app/node_modules
 
   multiplayer:
     build:
