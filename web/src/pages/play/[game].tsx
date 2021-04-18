@@ -5,9 +5,10 @@ import {
   Flex,
   Heading,
   Icon,
-  Link,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { LobbyAPI } from "boardgame.io";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
@@ -53,12 +54,15 @@ const Game: FC = () => {
             Start a new match
           </Button>
         </Flex>
+        <Link href="/play" passHref>
+          <ChakraLink>Back to games</ChakraLink>
+        </Link>
 
         <Divider mt={2} mb={4} />
 
         {activeMatches?.length === 0 && (
           <Heading textAlign="center" size="sm">
-            No matches found; why not <Link>start one</Link>?
+            No matches found; why not <ChakraLink>start one</ChakraLink>?
           </Heading>
         )}
       </Box>
