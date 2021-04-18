@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { ChangeEvent, FC, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FiPlus } from "react-icons/fi";
+import { FiUpload } from "react-icons/fi";
 
 import { useUpdateUsernameMutation } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
@@ -114,8 +114,8 @@ export const ProfileModal: FC<Props> = ({ onClose, ...props }: Props) => {
                 <Button
                   isFullWidth
                   onClick={openImageUpload}
-                  variant="ghost"
-                  leftIcon={<Icon as={FiPlus} />}
+                  variant="outline"
+                  leftIcon={<Icon as={FiUpload} />}
                 >
                   Upload an image
                 </Button>
