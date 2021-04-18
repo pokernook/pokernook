@@ -45,7 +45,11 @@ const Game: FC = () => {
             {game?.toString().replaceAll("-", " ")}
           </Heading>
 
-          <Button leftIcon={<Icon as={FiPlus} />} colorScheme="blue">
+          <Button
+            leftIcon={<Icon as={FiPlus} />}
+            colorScheme="blue"
+            variant="ghost"
+          >
             Start a new match
           </Button>
         </Flex>
