@@ -22,7 +22,7 @@ const Play: FC = () => {
   return (
     <DashboardLayout>
       <Box w="4xl" pt={10}>
-        <Heading>Games</Heading>
+        <Heading>Play</Heading>
         <Divider mt={2} mb={4} />
 
         <Wrap>
