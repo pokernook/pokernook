@@ -58,6 +58,7 @@ const LogIn: FC = () => {
             colorScheme="blue"
             type="submit"
             isLoading={logInResult.fetching}
+            variant="outline"
             isFullWidth
           >
             Log in to PokerNook

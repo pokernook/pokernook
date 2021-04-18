@@ -49,7 +49,7 @@ const Game: FC = () => {
           <Button
             leftIcon={<Icon as={FiPlus} />}
             colorScheme="blue"
-            variant="ghost"
+            variant="outline"
           >
             Start a new match
           </Button>

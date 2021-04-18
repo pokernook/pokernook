@@ -132,8 +132,15 @@ export const ProfileModal: FC<Props> = ({ onClose, ...props }: Props) => {
 
           <ModalFooter>
             <ButtonGroup>
-              <Button onClick={onClose}>Cancel</Button>
-              <Button colorScheme="blue" type="submit" form="profile-form">
+              <Button onClick={onClose} variant="outline">
+                Cancel
+              </Button>
+              <Button
+                colorScheme="blue"
+                type="submit"
+                form="profile-form"
+                variant="outline"
+              >
                 Save changes
               </Button>
             </ButtonGroup>

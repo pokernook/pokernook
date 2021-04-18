@@ -135,6 +135,7 @@ const AddFriend = () => {
             colorScheme="blue"
             w="xs"
             type="submit"
+            variant="outline"
             rightIcon={<Icon as={FiSend} />}
           >
             Send request

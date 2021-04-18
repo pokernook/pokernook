@@ -111,8 +111,15 @@ export const StatusModal: FC<Props> = ({ onClose, ...props }: Props) => {
 
           <ModalFooter>
             <ButtonGroup>
-              <Button onClick={handleClearStatus}>Clear status</Button>
-              <Button colorScheme="blue" type="submit" form="status-form">
+              <Button onClick={handleClearStatus} variant="outline">
+                Clear status
+              </Button>
+              <Button
+                colorScheme="blue"
+                type="submit"
+                form="status-form"
+                variant="outline"
+              >
                 Save status
               </Button>
             </ButtonGroup>

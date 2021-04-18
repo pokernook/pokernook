@@ -103,7 +103,9 @@ const UpdateEmail = () => {
           />
         </FormControl>
 
-        <Button type="submit">Save email</Button>
+        <Button type="submit" variant="outline">
+          Save email
+        </Button>
       </Fade>
     </Box>
   );
@@ -157,7 +159,9 @@ const UpdatePassword = () => {
         <FormErrorMessage>{errors.newPassword?.message}</FormErrorMessage>
       </FormControl>
 
-      <Button type="submit">Update password</Button>
+      <Button type="submit" variant="outline">
+        Update password
+      </Button>
     </Box>
   );
 };
@@ -179,7 +183,7 @@ const DeleteAccount = () => {
       </Heading>
       <FormLabel mb={2}>Careful, there&apos;s no coming back.</FormLabel>
 
-      <Button colorScheme="red" onClick={onAlertOpen}>
+      <Button colorScheme="red" onClick={onAlertOpen} variant="outline">
         Delete account
       </Button>
 
@@ -223,11 +227,11 @@ const AccountDeleteAlert: FC<AccountDeleteAlertProps> = ({
 
           <AlertDialogFooter>
             <ButtonGroup>
-              <Button ref={cancelRef} onClick={onClose}>
+              <Button ref={cancelRef} onClick={onClose} variant="outline">
                 Cancel
               </Button>
 
-              <Button colorScheme="red" onClick={onConfirm}>
+              <Button colorScheme="red" onClick={onConfirm} variant="outline">
                 Delete account
               </Button>
             </ButtonGroup>

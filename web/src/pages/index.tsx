@@ -97,6 +97,7 @@ const SignUp: FC = () => {
             type="submit"
             isLoading={signUpResult.fetching}
             isFullWidth
+            variant="outline"
           >
             Sign up for PokerNook
           </Button>
