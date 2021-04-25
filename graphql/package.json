@@ -4,7 +4,7 @@
   "repository": "github:pokernook/pokernook/graphql",
   "license": "BSD-3-Clause",
   "engines": {
-    "node": "15.x"
+    "node": "16.x"
   },
   "scripts": {
     "generate:prisma": "prisma generate",
