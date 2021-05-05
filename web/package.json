@@ -23,7 +23,7 @@
     "@urql/devtools": "^2.0.3",
     "@urql/exchange-graphcache": "^4.0.0",
     "boardgame.io": "^0.44.2",
-    "date-fns": "^2.21.1",
+    "date-fns": "^2.21.2",
     "emoji-mart": "^3.0.1",
     "framer-motion": "^4.1.11",
     "graphql": "^15.5.0",
