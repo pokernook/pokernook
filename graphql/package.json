@@ -43,7 +43,7 @@
     "@types/ioredis": "^4.26.0",
     "@types/node": "^15.0.0",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
-    "@typescript-eslint/parser": "^4.22.0",
+    "@typescript-eslint/parser": "^5.30.5",
     "chokidar-cli": "^2.1.0",
     "concurrently": "^6.0.2",
     "dotenv-cli": "^4.0.0",
